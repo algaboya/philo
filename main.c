@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 13:28:06 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/25 03:56:58 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/01/25 17:23:44 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	check_malloc(void *smth)
 
 void	start_philo(t_data *data, int argc, char **argv)
 {
-	init_data(data, argc, argv);
+	(void)argc;
+	printf("smth\n");
+	init_data(data, argv);
+	start_dinner(data);
 }
 
 int	main(int argc, char **argv)
@@ -30,8 +33,9 @@ int	main(int argc, char **argv)
 
 	if (argc == 5 || argc == 6) // what if 6, but without bonus
 	{
+		printf("ok\n");
 		start_philo(&data, argc, argv);
 		// clean(&data); //->philo is died || all are full  
 	}
-	clean_exit("Wrong input!!!\n");
+	// clean_exit("Wrong input!!!\n");
 }

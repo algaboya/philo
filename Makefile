@@ -6,10 +6,7 @@ SRC = main.c utils.c init.c help.c
 
 OBJ = $(SRC:.c=.o)
 
-all: $(NAME) libft
-
-libft:
-	$(MAKE) -C libft
+all: $(NAME)
 
 $(NAME):$(OBJ) philo.h Makefile
 	cc $(CFLAGS) $(OBJ) -o $(NAME)

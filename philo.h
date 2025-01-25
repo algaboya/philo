@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 13:29:44 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/25 03:59:29 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/01/25 18:12:22 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,16 @@ typedef struct s_philo
 
 struct	s_data
 {
-	long	nbr_of_philos;
-	long	time_to_die;
-	long	time_to_eat;
-	long	time_to_sleep;
-	bool	philo_is_dead;
-	t_fork	*forks;
-	t_philo	*philos;
-	int		start;
+	int				start;
+	long			nbr_of_philos;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
+	bool			philo_is_dead;
+	bool			theads_are_ready;
+	t_fork			*forks;
+	t_philo			*philos;
+	pthread_mutex_t	*mtx;
 };
 
 int		ft_strlen(const char *str);
@@ -75,7 +77,7 @@ long	ft_atol(char *str);
 long	valid_num(char *str);
 void	init_data(t_data *t_data, char **argv);
 void	check_malloc(void *smth);
-void	mutex_ident(t_mtx *mtx, t_mode mode);
+void	mutex_ident(pthread_mutex_t *mtx, t_mode mode);
 void	mtx_error(int status, t_mode mode);
 void	thread_ident(pthread_t *thread, t_data *data, void *(*abuba)(void *), t_mode mode);
 void	thread_error(int status, t_mode mode);
