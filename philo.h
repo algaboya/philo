@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 13:29:44 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/24 20:29:03 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/01/25 03:59:29 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,28 @@
 # include <stdbool.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <errno.h>
 
 typedef struct pthread_mutex_t	t_mtx;
 typedef struct s_data			t_data;
+
+//enum e_opcode
 
 typedef enum s_mode
 {
 	LOCK,
 	UNLOCK,
 	CREATE,
+	DESTROY,
+	INIT,
 	JOIN,
-	CREATE,
+	DETACH,
 }			t_mode;
 
 typedef struct s_fork
 {
-	int		fork_id;
-	t_mtx	fork;
+	int				fork_id;
+	pthread_mutex_t	fork;
 }				t_fork;
 
 
@@ -53,8 +58,7 @@ typedef struct s_philo
 
 struct	s_data
 {
-	long	nmb_of_philos;
-	long	philos;
+	long	nbr_of_philos;
 	long	time_to_die;
 	long	time_to_eat;
 	long	time_to_sleep;
@@ -69,9 +73,13 @@ void	ft_putstr_fd(char *s, int fd);
 void	clean_exit(char *msg);
 long	ft_atol(char *str);
 long	valid_num(char *str);
-void	init_data(t_data *t_data, int argc, char **argv);
+void	init_data(t_data *t_data, char **argv);
 void	check_malloc(void *smth);
-
-
+void	mutex_ident(t_mtx *mtx, t_mode mode);
+void	mtx_error(int status, t_mode mode);
+void	thread_ident(pthread_t *thread, t_data *data, void *(*abuba)(void *), t_mode mode);
+void	thread_error(int status, t_mode mode);
+void	philo_init(t_data *data);
+void	fork_init(t_data *data);
 
 #endif

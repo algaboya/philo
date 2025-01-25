@@ -2,7 +2,7 @@ NAME = philo
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = main.c utils.c 
+SRC = main.c utils.c init.c help.c
 
 OBJ = $(SRC:.c=.o)
 
