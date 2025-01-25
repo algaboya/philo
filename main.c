@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 13:28:06 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/25 17:23:44 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/01/25 19:18:26 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	start_philo(t_data *data, int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-
 	t_data	data;
 
 	if (argc == 5 || argc == 6) // what if 6, but without bonus

@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 13:29:44 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/25 18:12:22 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/01/25 21:23:52 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,13 @@ void	init_data(t_data *t_data, char **argv);
 void	check_malloc(void *smth);
 void	mutex_ident(pthread_mutex_t *mtx, t_mode mode);
 void	mtx_error(int status, t_mode mode);
-void	thread_ident(pthread_t *thread, t_data *data, void *(*abuba)(void *), t_mode mode);
+void	thread_ident(pthread_t *thread,
+			t_data *data, void *(*abuba)(void *),
+			t_mode mode);
 void	thread_error(int status, t_mode mode);
 void	philo_init(t_data *data);
 void	fork_init(t_data *data);
+void	start_dinner(t_data *data);
+void	run_threads(t_data *data);
 
 #endif
