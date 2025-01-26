@@ -6,25 +6,36 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:33:34 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/25 21:35:26 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/01/26 04:53:19 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	run_threads(t_data *data)
-{
-	while (!if_threads_ready(data->mtx, &data->theads_are_ready))
-		;
-}
+// void	run_threads(t_data *data)
+// {
+// 	while (!if_threads_ready(data->mtx, &data->theads_are_ready))
+// 		;
+// }
 
 void	*dinner_sim(void *data)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)data;
-	run_threads(philo->data);
-	
+	while (!if_threads_ready(&philo->data->mtx, &philo->data->theads_are_ready))
+		;
+	// run_threads(philo->data);
+	while(!sim_finished(philo->data))
+	{
+		if (philo->is_full)
+			break ;
+		eat(philo);
+		monitoring(philo, SLEEP);
+		usleep_helper(philo->data->time_to_sleep, philo->data);
+		think(philo);
+	}
+	return (0);
 }
 
 void	start_dinner(t_data *data)
@@ -32,27 +43,23 @@ void	start_dinner(t_data *data)
 	int i;
 
 	i = 0;
-	if (data->nbr_of_philos == 1)
-	;//cewd
-	else
-	{
 		while (i < data->nbr_of_philos)
 		{
-			thread_ident(&data->philos[i].philo_id, dinner_sim,
-				&data->philos[i], CREATE);
+			thread_ident(&data->philos[i].thread_id, data,
+			dinner_sim, CREATE);
 			i++;
 		}
+
+	data->start = get_time(MILLISECOND);
+	set_bool(&data->mtx, &data->theads_are_ready, 1);
+	i = 0;
+	while (i < data->nbr_of_philos)
+	{
+		thread_ident(&data->philos[i].thread_id, NULL,
+			NULL, JOIN);
+		i++;
 	}
-	mtx_lock_unlock(&data->mtx, data);
 }
-
-// void	mtx_lock_unlock(pthread_mutex_t *mtx, t_data *data)
-// {
-// 	mutex_ident(mtx, LOCK);
-// 	data->theads_are_ready = true;
-// 	mutex_ident(mtx, UNLOCK);
-// }
-
 
 bool	if_threads_ready(pthread_mutex_t *mtx, bool *val)
 {

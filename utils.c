@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:37:59 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/25 15:19:09 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/01/26 02:28:43 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,42 +75,6 @@ long	valid_num(char *str)
 	res = ft_atol(str);
 	return (res);
 }
-
-// long valid_num(char *str)
-// {
-//     int i = 0;
-//     long res;
-
-//     if (!str || !*str)
-//         return (clean_exit("Input is NULL or empty\n"), EXIT_FAILURE);
-
-//     // Skip whitespace
-//     while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
-//         i++;
-
-//     // Check for '+' or invalid '-'
-//     if (str[i] == '+')
-//         i++;
-//     if (!str[i] || str[i] == '-')
-//         return (clean_exit("Need a positive number\n"), EXIT_FAILURE);
-
-//     // Ensure all characters are digits
-//     while (str[i])
-//     {
-//         if (str[i] < '0' || str[i] > '9')
-//             return (clean_exit("Input a number\n"), EXIT_FAILURE);
-//         i++;
-//     }
-
-//     // Check for number length > 10
-//     if (ft_strlen(str) > 10)
-//         return (clean_exit("Need a number less than your input\n"), EXIT_FAILURE);
-
-//     // Convert to long
-//     res = ft_atol(str);
-//     return res;
-// }
-
 
 void	ft_putstr_fd(char *s, int fd)
 {
