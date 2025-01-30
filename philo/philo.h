@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 13:29:44 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/26 04:36:25 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:40:58 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,15 @@ typedef struct s_philo
 
 struct	s_data
 {
-	size_t					start;
-	bool				end;
-	long				nbr_of_philos;		//philo_nmb
-	long				time_to_die;
-	long				time_to_eat;
-	long				time_to_sleep;
-	bool				philo_is_dead;		//dead_flag
-	bool				theads_are_ready;	//all_ready
-	long				must_eat;
+	size_t				start;
+	size_t				end;
+	size_t				nbr_of_philos;		//philo_nmb
+	size_t				time_to_die;
+	size_t				time_to_eat;
+	size_t				time_to_sleep;
+	size_t				philo_is_dead;		//dead_flag
+	size_t				threads_are_ready;	//all_ready
+	size_t				must_eat;
 	pthread_mutex_t		print_mtx;
 	pthread_mutex_t		time_mtx;
 	pthread_mutex_t		die_mtx;
@@ -111,25 +111,24 @@ int		thread_ident(pthread_t *thread,
 			t_mode mode);
 int		thread_error(int status, t_mode mode);
 size_t	get_time();
+void    eat(t_philo *philo);
+void	sleeping(t_philo *philo);
+void	monitoring(t_philo *philo, t_print_status status, int end);
 
-
-void	start_philo(t_data *data, char **argv);
+int		start_dinner(t_data *data);
 int		ft_strlen(const char *str);
 void	ft_putstr_fd(char *s, int fd);
 void	clean_exit(char *msg);
 long	ft_atol(char *str);
 void	check_malloc(void *smth);
-void	start_dinner(t_data *data);
 void	run_threads(t_data *data);
 void	set_long(pthread_mutex_t *mtx, long *dest, long value);
-long	get_long(pthread_mutex_t *mtx, long *value);
+size_t	get_val(pthread_mutex_t *mtx, size_t *value);
 void	set_bool(pthread_mutex_t *mtx, bool *dest, bool value);
 bool	get_bool(pthread_mutex_t *mtx, bool *value);
-// long	get_time(t_time_code time_code);
-void	usleep_helper(long usec, t_data *data);
-void	monitoring(t_philo *philo, t_print_status status);
-void    eat(t_philo *philo);
 void    think(t_philo *philo);
+// long	get_time(t_time_code time_code);
+void	usleep_helper(size_t usec, t_philo *philo);
 bool	if_threads_ready(pthread_mutex_t *mtx, bool *val);
 bool	sim_finished(t_data *data);
 #endif

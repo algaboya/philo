@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 13:28:06 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/26 04:41:37 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:49:04 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ int	main(int argc, char **argv)
 	}
 	if (init_data(&data) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	// start_philo(&data, argv);
+	printf("val\n");
+	if (start_dinner(&data) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 		// clean(&data); //->philo is died || all are full  
 	// clean_exit("Wrong input!!!\n");
 	return (0);

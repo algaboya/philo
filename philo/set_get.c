@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 23:25:44 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/26 04:31:27 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:45:14 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@
 // 	mutex_ident(mtx, UNLOCK);
 // }
 
-// long	get_long(pthread_mutex_t *mtx, long *value)
-// {
-// 	long	res;
+size_t	get_val(pthread_mutex_t *mtx, size_t *value)
+{
+	size_t	res;
 
-// 	mutex_ident(mtx, LOCK);
-// 	res = *value;
-// 	mutex_ident(mtx, UNLOCK);
-// 	return (res);
-// }
+	mutex_ident(mtx, LOCK);
+	res = *value;
+	mutex_ident(mtx, UNLOCK);
+	return (res);
+}
 
 // void	set_bool(pthread_mutex_t *mtx, bool *dest, bool value)
 // {
