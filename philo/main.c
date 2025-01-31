@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 13:28:06 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/30 13:49:04 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/01/31 04:01:34 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	val_args(t_data *data, int argc, char **argv)
 			return (printf("Parameter should be bigger than 60ms and less than INT_MAX.\n"), EXIT_FAILURE);
 	}
 	else
-		return (printf("Input right args\n"), EXIT_SUCCESS);
+		return (printf("Input right args\n"), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -53,11 +53,14 @@ int	main(int argc, char **argv)
 	}
 	if (init_data(&data) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	printf("val\n");
 	if (start_dinner(&data) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-		// clean(&data); //->philo is died || all are full  
-	// clean_exit("Wrong input!!!\n");
+	while (check_philo(&data))
+		;
+	if (!joining(&data))
+		return (cleaning(&data));
+	// if (!cleaning(&data))
+	// 	return (DESTROY_ERROR);
 	return (0);
 }
  

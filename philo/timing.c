@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 23:44:28 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/30 13:39:38 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/01/31 03:35:07 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	get_time()
 	struct timeval	time_value;
 
 	if (gettimeofday(&time_value, NULL))
-		return (printf("Gettime error\n"), EXIT_FAILURE);
+		return (printf("Gettime error\n"), 0);
 	return (time_value.tv_sec * 1000 + time_value.tv_usec / 1000);
 }
 

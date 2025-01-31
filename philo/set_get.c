@@ -6,18 +6,11 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 23:25:44 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/30 12:45:14 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/01/31 03:57:01 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// void	set_long(pthread_mutex_t *mtx, long *dest, long value)
-// {
-// 	mutex_ident(mtx, LOCK);
-// 	*dest = value;
-// 	mutex_ident(mtx, UNLOCK);
-// }
 
 size_t	get_val(pthread_mutex_t *mtx, size_t *value)
 {
@@ -29,25 +22,52 @@ size_t	get_val(pthread_mutex_t *mtx, size_t *value)
 	return (res);
 }
 
-// void	set_bool(pthread_mutex_t *mtx, bool *dest, bool value)
-// {
-// 	mutex_ident(mtx, LOCK);
-// 	*dest = value;
-// 	mutex_ident(mtx, UNLOCK);
-// }
+int	cleaning(t_data *data)
+{
+	if (!clean_philos(data))
+		return (0);
+	if (!clean_forks(data))
+		return (0);
+	if (mutex_ident(&data->ready_mtx, DESTROY) != EXIT_SUCCESS)
+		return (0);
+	if (mutex_ident(&data->time_mtx, DESTROY) != EXIT_SUCCESS)
+		return (0);
+	if (mutex_ident(&data->die_mtx, DESTROY) != EXIT_SUCCESS)
+		return (0);
+	if (mutex_ident(&data->get_mtx, DESTROY) != EXIT_SUCCESS)
+		return (0);
+	free(data->forks);
+	free(data->philos);
+	return (1);
+}
 
-// bool	get_bool(pthread_mutex_t *mtx, bool *value)
-// {
-// 	bool	res;
+int	clean_philos(t_data *data)
+{
+	size_t	i;
+	i = 0;
+	while (i < data->nbr_of_philos)
+	{
+		if (mutex_ident(&data->philos[i].last_meal_mtx, DESTROY) != EXIT_SUCCESS)
+			return (0);
+		if (mutex_ident(&data->philos[i].meal_count_mtx, DESTROY) != EXIT_SUCCESS)
+			return (0);
+		if (mutex_ident(&data->philos[i].print_mtx, DESTROY) != EXIT_SUCCESS)
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
-// 	mutex_ident(mtx, LOCK);
-// 	res = *value;
-// 	mutex_ident(mtx, UNLOCK);
-// 	return (res);
-// }
+int	clean_forks(t_data *data)
+{
+	size_t	i;
 
-
-// bool	sim_finished(t_data *data)
-// {
-// 	return (get_bool(&data->mtx, &data->end));
-// }
+	i = 0;
+	while (i < data->nbr_of_philos)
+	{
+		if (mutex_ident(&data->forks[i], DESTROY) != EXIT_SUCCESS)
+			return (0);
+		i++;
+	}
+	return (1);
+}

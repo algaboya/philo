@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 23:56:43 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/30 13:55:32 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/01/31 02:12:30 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ int	mtx_error(int status, t_mode mode)
 	if (status == EINVAL && (mode == LOCK || mode == UNLOCK
 			|| mode == INIT))
         return (printf("The value for mutex is invalid\n"), EXIT_FAILURE);
-	// else if (status == EPERM)
-    //     return (printf("Operation not permitted\n"), EXIT_FAILURE);
-	// else if (status == EDEADLK)
-    //     return (printf("Resource deadlock would occur\n"), EXIT_FAILURE);
-	// else if (status == ENOMEM)
-    //     return (printf("The procces can't allocate enough 
-	// 		memory for creating another mutex\n"), EXIT_FAILURE);
-	// else if (status == EBUSY)
-    //     return (printf("Device or resource is busy\n"), EXIT_FAILURE);
+	else if (status == EPERM)
+        return (printf("Operation not permitted\n"), EXIT_FAILURE);
+	else if (status == EDEADLK)
+        return (printf("Resource deadlock would occur\n"), EXIT_FAILURE);
+	else if (status == ENOMEM)
+        return (printf("The procces can't allocate enough \
+			memory for creating another mutex\n"), EXIT_FAILURE);
+	else if (status == EBUSY)
+        return (printf("Device or resource is busy\n"), EXIT_FAILURE);
     return (EXIT_SUCCESS);
 }
 
