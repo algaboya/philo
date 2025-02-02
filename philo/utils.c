@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:37:59 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/26 02:28:43 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/02/02 14:36:35 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ long	ft_atol(char *str)
 
 long	valid_num(char *str)
 {
-	int	i;
+	int		i;
 	long	res;
 
 	i = 0;

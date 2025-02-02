@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 23:25:44 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/31 03:57:01 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/02/02 14:24:55 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,15 @@ int	cleaning(t_data *data)
 int	clean_philos(t_data *data)
 {
 	size_t	i;
+
 	i = 0;
 	while (i < data->nbr_of_philos)
 	{
-		if (mutex_ident(&data->philos[i].last_meal_mtx, DESTROY) != EXIT_SUCCESS)
+		if (mutex_ident(&data->philos[i].last_meal_mtx, DESTROY) != 0)
 			return (0);
-		if (mutex_ident(&data->philos[i].meal_count_mtx, DESTROY) != EXIT_SUCCESS)
+		if (mutex_ident(&data->philos[i].meal_count_mtx, DESTROY) != 0)
 			return (0);
-		if (mutex_ident(&data->philos[i].print_mtx, DESTROY) != EXIT_SUCCESS)
+		if (mutex_ident(&data->philos[i].print_mtx, DESTROY) != 0)
 			return (0);
 		i++;
 	}

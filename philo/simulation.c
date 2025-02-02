@@ -6,45 +6,26 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 17:33:34 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/31 03:43:44 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/02/02 14:27:28 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// void	run_threads(t_data *data)
-// {
-// 	while (!if_threads_ready(&data->mtx, &data->threads_are_ready))
-// 	{
-// 		usleep(1000);
-// 	}
-// }
-
-// void	wait_for_all_philos(t_philo *philo)
-// {
-// 	while (!get_val(&(philo->data->ready_mtx), &philo->data->threads_are_ready))
-// 		;
-// }
-
 void	*dinner_sim(void *ptr)
 {
 	t_philo	*philo;
 
-    philo = (t_philo *)ptr;
+	philo = (t_philo *)ptr;
 	while (!get_val(&(philo->data->ready_mtx), &philo->data->threads_are_ready))
 		;
-		// wait_for_all_philos(philo);
-
-    if (philo->philo_id % 2 == 0)
-		usleep_helper(get_val(&(philo->data->get_mtx), &(philo->data->time_to_eat)),
-			philo);
-	// run_threads(philo->data);
-	while(!get_val(&(philo->data->die_mtx), &(philo->data->philo_is_dead)))
+	if (philo->philo_id % 2 == 0)
+		usleep_helper(get_val(&(philo->data->get_mtx),
+				&(philo->data->time_to_eat)), philo);
+	while (!get_val(&(philo->data->die_mtx), &(philo->data->philo_is_dead)))
 	{
-		// if (philo->is_full)
-		// 	break ;
 		eat(philo);
-        sleeping(philo);
+		sleeping(philo);
 		think(philo);
 	}
 	return (ptr);
@@ -52,21 +33,21 @@ void	*dinner_sim(void *ptr)
 
 int	start_dinner(t_data *data)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (i < data->nbr_of_philos)
 	{
 		if (pthread_create(&data->philos[i].thread, NULL, &dinner_sim,
-			&data->philos[i]) == -1)
-            return (EXIT_FAILURE);
+				&data->philos[i]) == -1)
+			return (EXIT_FAILURE);
 		i++;
 	}
-    mutex_ident(&data->ready_mtx, LOCK);
-    data->threads_are_ready = 1;
+	mutex_ident(&data->ready_mtx, LOCK);
+	data->threads_are_ready = 1;
 	data->start = get_time();
 	pthread_mutex_unlock(&data->ready_mtx);
-    return (EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
 int	check_philo(t_data *data)
@@ -96,7 +77,6 @@ int	check_philo(t_data *data)
 	}
 	return (1);
 }
-
 
 void	if_dead(t_data *data)
 {
