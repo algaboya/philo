@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 13:29:44 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/31 02:57:44 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/02/02 14:13:18 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_philo
 {
 	int					philo_id;    		//id
 	size_t				last_meal_time;		//last_meal
-	size_t				meal_count;			//num_eaten
+	int				meal_count;			//num_eaten
 	pthread_t			thread;
 	pthread_mutex_t		*first_fork;		//right
 	pthread_mutex_t		*second_fork;		//left
@@ -88,7 +88,7 @@ struct	s_data
 	size_t				time_to_sleep;
 	size_t				philo_is_dead;		//dead_flag
 	size_t				threads_are_ready;	//all_ready
-	size_t				must_eat;
+	ssize_t				must_eat;
 	pthread_mutex_t		print_mtx;
 	pthread_mutex_t		time_mtx;
 	pthread_mutex_t		die_mtx;
@@ -122,6 +122,10 @@ int		cleaning(t_data *data);
 int		start_dinner(t_data *data);
 int		clean_philos(t_data *data);
 int		clean_forks(t_data *data);
+int						correct_input(int argc, char **argv, t_data *data);
+int						all_numbers(int argc, char **argv);
+size_t					ft_atos(const char *str);
+
 
 // int		start_dinner(t_data *data);
 // int		ft_strlen(const char *str);

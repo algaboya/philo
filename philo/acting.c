@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:37:06 by algaboya          #+#    #+#             */
-/*   Updated: 2025/01/31 03:48:33 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/02/02 14:12:32 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ int	is_full(t_data *data)
 	size_t	i;
 
 	i = 0;
-	// if (data->must_eat == -1)
-	// 	return (0);
+	if (data->must_eat <= 1)
+		return (0);
 	while (i < data->nbr_of_philos)
 	{
 		mutex_ident(&data->philos[i].meal_count_mtx, LOCK);

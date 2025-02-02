@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror
 SRC = main.c utils.c init.c\
 		help.c simulation.c\
 		set_get.c timing.c\
-		acting.c\
+		acting.c val.c\
 
 OBJ = $(SRC:.c=.o)
 
