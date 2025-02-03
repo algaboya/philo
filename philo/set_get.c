@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 23:25:44 by algaboya          #+#    #+#             */
-/*   Updated: 2025/02/03 16:44:35 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:18:14 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	is_full(t_data *data)
 	size_t	i;
 
 	i = 0;
-	if (data->must_eat <= 1)
+	if (data->must_eat < 1)
 		return (0);
 	while (i < data->nbr_of_philos)
 	{
