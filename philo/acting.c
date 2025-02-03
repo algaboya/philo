@@ -6,39 +6,11 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:37:06 by algaboya          #+#    #+#             */
-/*   Updated: 2025/02/03 16:44:16 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:45:52 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	eat(t_philo *philo)
-{
-	if (philo->data->nbr_of_philos == 1)
-		return (one_philo_case(philo));
-	if (philo->first_fork < philo->second_fork)
-	{
-		mutex_ident(philo->first_fork, LOCK);
-		monitoring(philo, TAKEN_1st_FORK, 0);
-		mutex_ident(philo->second_fork, LOCK);
-	}
-	else
-	{
-		mutex_ident(philo->second_fork, LOCK);
-		monitoring(philo, TAKEN_1st_FORK, 0);
-		mutex_ident(philo->first_fork, LOCK);
-	}
-	mutex_ident(&philo->last_meal_mtx, LOCK);
-	philo->last_meal_time = get_time();
-	mutex_ident(&philo->last_meal_mtx, UNLOCK);
-	mutex_ident(&philo->meal_count_mtx, LOCK);
-	monitoring(philo, EAT, 0);
-	philo->meal_count++;
-	mutex_ident(&philo->meal_count_mtx, UNLOCK);
-	usleep_helper(philo->data->time_to_eat, philo);
-	mutex_ident(philo->first_fork, UNLOCK);
-	mutex_ident(philo->second_fork, UNLOCK);
-}
 
 void	one_philo_case(t_philo *philo)
 {
@@ -91,30 +63,30 @@ void	monitoring(t_philo *philo, t_print_status status, int end)
 	mutex_ident(&philo->print_mtx, UNLOCK);
 }
 
-// void	eat(t_philo *philo)
-// {
-// 	mutex_ident(philo->second_fork, LOCK);
-// 	monitoring(philo, TAKEN_1st_FORK, 0);
-// 	if (philo->data->nbr_of_philos == 1)
-// 	{
-// 		usleep_helper(get_val(&(philo->data->get_mtx),
-// 				&(philo->data->time_to_die)), philo);
-// 		mutex_ident(&philo->data->die_mtx, LOCK);
-// 		philo->data->philo_is_dead = 1;
-// 		mutex_ident(&philo->data->die_mtx, UNLOCK);
-// 		mutex_ident(philo->second_fork, UNLOCK);
-// 		return ;
-// 	}
-// 	mutex_ident(philo->first_fork, LOCK);
-// 	monitoring(philo, TAKEN_1st_FORK, 0);
-// 	mutex_ident(&philo->last_meal_mtx, LOCK);
-// 	philo->last_meal_time = get_time();
-// 	mutex_ident(&philo->last_meal_mtx, UNLOCK);
-// 	mutex_ident(&philo->meal_count_mtx, LOCK);
-// 	monitoring(philo, EAT, 0);
-// 	philo->meal_count++;
-// 	mutex_ident(&philo->meal_count_mtx, UNLOCK);
-// 	usleep_helper(philo->data->time_to_eat, philo);
-// 	mutex_ident(philo->second_fork, UNLOCK);
-// 	mutex_ident(philo->first_fork, UNLOCK);
-// }
+void	eat(t_philo *philo)
+{
+	mutex_ident(philo->second_fork, LOCK);
+	monitoring(philo, TAKEN_1st_FORK, 0);
+	if (philo->data->nbr_of_philos == 1)
+	{
+		usleep_helper(get_val(&(philo->data->get_mtx),
+				&(philo->data->time_to_die)), philo);
+		mutex_ident(&philo->data->die_mtx, LOCK);
+		philo->data->philo_is_dead = 1;
+		mutex_ident(&philo->data->die_mtx, UNLOCK);
+		mutex_ident(philo->second_fork, UNLOCK);
+		return ;
+	}
+	mutex_ident(philo->first_fork, LOCK);
+	monitoring(philo, TAKEN_1st_FORK, 0);
+	mutex_ident(&philo->last_meal_mtx, LOCK);
+	philo->last_meal_time = get_time();
+	mutex_ident(&philo->last_meal_mtx, UNLOCK);
+	mutex_ident(&philo->meal_count_mtx, LOCK);
+	monitoring(philo, EAT, 0);
+	philo->meal_count++;
+	mutex_ident(&philo->meal_count_mtx, UNLOCK);
+	usleep_helper(philo->data->time_to_eat, philo);
+	mutex_ident(philo->second_fork, UNLOCK);
+	mutex_ident(philo->first_fork, UNLOCK);
+}
