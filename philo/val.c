@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:07:53 by algaboya          #+#    #+#             */
-/*   Updated: 2025/02/02 14:36:46 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:36:09 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	all_numbers(int argc, char **argv)
 	return (1);
 }
 
-int	correct_input(int argc, char **argv, t_data *philo)
+int	valid_input(int argc, char **argv, t_data *philo)
 {
 	if (!all_numbers(argc, argv))
 	{

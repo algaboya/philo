@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 23:25:44 by algaboya          #+#    #+#             */
-/*   Updated: 2025/02/02 14:24:55 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:44:35 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,27 @@ int	clean_forks(t_data *data)
 	{
 		if (mutex_ident(&data->forks[i], DESTROY) != EXIT_SUCCESS)
 			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	is_full(t_data *data)
+{
+	size_t	i;
+
+	i = 0;
+	if (data->must_eat <= 1)
+		return (0);
+	while (i < data->nbr_of_philos)
+	{
+		mutex_ident(&data->philos[i].meal_count_mtx, LOCK);
+		if (data->philos[i].meal_count < data->must_eat)
+		{
+			mutex_ident(&data->philos[i].meal_count_mtx, UNLOCK);
+			return (0);
+		}
+		mutex_ident(&data->philos[i].meal_count_mtx, UNLOCK);
 		i++;
 	}
 	return (1);

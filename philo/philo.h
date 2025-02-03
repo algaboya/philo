@@ -6,7 +6,7 @@
 /*   By: algaboya <algaboya@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 13:29:44 by algaboya          #+#    #+#             */
-/*   Updated: 2025/02/02 14:37:33 by algaboya         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:35:54 by algaboya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int		thread_ident(pthread_t *thread,
 			t_mode mode);
 int		thread_error(int status, t_mode mode);
 size_t	get_time(void);
+void	one_philo_case(t_philo *philo);
 void	eat(t_philo *philo);
 void	sleeping(t_philo *philo);
 void	monitoring(t_philo *philo, t_print_status status, int end);
@@ -110,7 +111,7 @@ int		cleaning(t_data *data);
 int		start_dinner(t_data *data);
 int		clean_philos(t_data *data);
 int		clean_forks(t_data *data);
-int		correct_input(int argc, char **argv, t_data *data);
+int		valid_input(int argc, char **argv, t_data *data);
 int		all_numbers(int argc, char **argv);
 size_t	ft_atos(const char *str);
 size_t	get_val(pthread_mutex_t *mtx, size_t *value);
